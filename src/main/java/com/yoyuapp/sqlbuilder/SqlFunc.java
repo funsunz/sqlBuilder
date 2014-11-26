@@ -8,7 +8,8 @@ public class SqlFunc{
 	}
 	
 	public static SqlColumn count(SqlColumn column){
-		SqlColumn c = new SqlColumn(column.sb.insert(0, "COUNT(").append(")").toString());
+		StringBuilder s = new StringBuilder("COUNT(").append(column.sb).append(")");
+		SqlColumn c = new SqlColumn(s.toString());
 		return c;
 	}
 	

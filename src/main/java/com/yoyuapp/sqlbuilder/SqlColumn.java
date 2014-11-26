@@ -18,6 +18,11 @@ public class SqlColumn extends SqlSegment{
 		return con;
 	}
 	
+	public static SqlColumn of(SqlTable table, String column){
+		SqlColumn con = new SqlColumn(table.getName()+"."+column);
+		return con;
+	}
+	
 	
 	protected SqlColumn(StringBuilder column, String as, List<Object> params) {
 		super();
@@ -133,7 +138,7 @@ public class SqlColumn extends SqlSegment{
 		return c;
 	}
 	
-	/** > great than
+	/** > greater than
 	 * @param column
 	 * @return
 	 */
@@ -157,7 +162,7 @@ public class SqlColumn extends SqlSegment{
 		return addCondition(column, "=");
 	}
 	
-	/** >= great than or equals
+	/** >= greater than or equals
 	 * @param column
 	 * @return
 	 */
@@ -183,7 +188,7 @@ public class SqlColumn extends SqlSegment{
 	
 	
 	
-	/**  > great than
+	/**  > greater than
 	 * @param param
 	 * @return
 	 */
