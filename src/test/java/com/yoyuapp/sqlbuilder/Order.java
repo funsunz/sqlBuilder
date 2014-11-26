@@ -3,11 +3,6 @@ package com.yoyuapp.sqlbuilder;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="order")
 public class Order {
 	private int id;
 	private String name;

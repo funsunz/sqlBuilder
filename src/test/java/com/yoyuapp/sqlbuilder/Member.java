@@ -2,11 +2,6 @@ package com.yoyuapp.sqlbuilder;
 
 import java.util.Calendar;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="member")
 public class Member {
 	private int id;
 	private String name;

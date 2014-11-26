@@ -21,20 +21,17 @@ public class SQLTest {
 	public void testCondition(){
 		QuerySql sql = SqlBuilder
 			    .select(
-			        Member.ID, 
-			        Member.NAME, 
-			        SqlFunc.now().as("now"),
-			        Member.AGE.add(5).div(2).as("half_of_age_increase_5"),
-			        Member.AGE.div(Member.ID.mul(2)).as("age_double_id_rate")
+			        Order.ID,
+			        Order.NAME,
+			        Order.CREATE_TIME,
+			        Member.NAME.as("member_name")
 			    )
 			    .from(Member._TABLE)
+			    .leftJoin(Order._TABLE, Order.MEMBER_ID, Member.ID)
 			    .where(
-			        Member.AGE.gt(20)
-			        .AND(
-			            Member.NAME.like("T%").OR(Member.NAME.like("J%"))
-			        )
+			        Order.ID.mul(2).lt_eq(Member.ID)
 			    )
-			    .orderBy(Member.NAME.desc());
+			    .orderBy(Order.CREATE_TIME.desc());
 		
 		System.out.println(sql);
 	}
