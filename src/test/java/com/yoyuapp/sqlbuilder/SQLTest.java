@@ -7,26 +7,36 @@ import org.junit.Test;
 public class SQLTest {
 	@Test
 	public void testSQL(){
-		QuerySql sql = SqlBuilder.select(SqlColumn.of("a").as("a_")).from(SqlTable.of("u_member"));
+		QuerySql sql = SqlBuilder.
+				select(SqlColumn.of("name")).
+				from(SqlTable.of("member")).
+				where(
+					SqlColumn.of("id").eq(20)
+				);
 		
-		System.out.println(sql);
+		System.out.println(sql.toString());
 	}
 	
 	@Test
 	public void testCondition(){
-		WhereSegment s = SqlColumn.of("a").gt(5).AND(SqlColumn.of("b").isNull().OR(SqlColumn.of("c").eq(5)));
 		QuerySql sql = SqlBuilder
-				.select(SqlFunc.count().as("dsaf"), SqlColumn.of("b").add(SqlColumn.of("h")).mul(6))
-				.from(SqlTable.of("u_member"), SqlTable.of("b_event"))
-				.where(s)
-				.orderBy(SqlColumn.of("b").asc(), SqlColumn.of("a").desc())
-				.groupBy(SqlColumn.of("d"));
+			    .select(
+			        Member.ID, 
+			        Member.NAME, 
+			        SqlFunc.now().as("now"),
+			        Member.AGE.add(5).div(2).as("half_of_age_increase_5"),
+			        Member.AGE.div(Member.ID.mul(2)).as("age_double_id_rate")
+			    )
+			    .from(Member._TABLE)
+			    .where(
+			        Member.AGE.gt(20)
+			        .AND(
+			            Member.NAME.like("T%").OR(Member.NAME.like("J%"))
+			        )
+			    )
+			    .orderBy(Member.NAME.desc());
 		
 		System.out.println(sql);
-		
-		for (Object o : sql.getParams()){
-			System.out.println(o);
-		}
 	}
 	
 	@Test
