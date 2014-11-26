@@ -1,6 +1,6 @@
 # sqlBuilder
 
-a friendly, simple SQL builder written in Java, with no 3rd party dependencies
+a friendly, simple and safe SQL builder written in Java, with no 3rd party dependencies
 
 ## simple example
 
@@ -180,10 +180,10 @@ FROM
 	member
 WHERE
 	member.age > 20
-AND (
-	member.name LIKE 'T%'
-	OR member.name LIKE 'J%'
-)
+	AND (
+		member.name LIKE 'T%'
+		OR member.name LIKE 'J%'
+	)
 GROUP BY
 	member.age
 HAVING
@@ -207,6 +207,33 @@ QuerySql sql = SqlBuilder
 	.groupBy(Member.AGE)
 	.having(
 		SqlColumn.of("count").gt(2)
+	);
+```
+
+### join table
+```sql
+SELECT
+	order.*,
+	member.name AS 'member_name'
+FROM
+	order
+LEFT JOIN 
+	member ON order.memberId = member.id
+WHERE
+	(order.id * 2) <= member.id
+```
+
+in sqlBuilder : 
+```java
+QuerySql sql = SqlBuilder
+	.select(
+		Order._ALL,
+		Member.NAME.as("member_name")
+	)
+	.from(Order._TABLE)
+	.leftJoin(Member._TABLE, Order.MEMBER_ID, Member.ID)
+	.where(
+		Order.ID.mul(2).lt_eq(Member.ID)
 	);
 ```
 

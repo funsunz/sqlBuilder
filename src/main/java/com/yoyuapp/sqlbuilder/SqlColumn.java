@@ -138,7 +138,7 @@ public class SqlColumn extends SqlSegment{
 		return c;
 	}
 	
-	/** > greater than
+	/** > greater than other column
 	 * @param column
 	 * @return
 	 */
@@ -146,7 +146,7 @@ public class SqlColumn extends SqlSegment{
 		return addCondition(column, ">");
 	}
 	
-	/** < less than
+	/** < less than other column
 	 * @param column
 	 * @return
 	 */
@@ -154,7 +154,7 @@ public class SqlColumn extends SqlSegment{
 		return addCondition(column, "<");
 	}
 	
-	/** = equals
+	/** = equals to other column
 	 * @param column
 	 * @return
 	 */
@@ -162,7 +162,15 @@ public class SqlColumn extends SqlSegment{
 		return addCondition(column, "=");
 	}
 	
-	/** >= greater than or equals
+	/** <> not equals to other column
+	 * @param column
+	 * @return
+	 */
+	public WhereSegment not_eq(SqlColumn column){
+		return addCondition(column, "<>");
+	}
+	
+	/** >= greater than or equals to other column
 	 * @param column
 	 * @return
 	 */
@@ -170,7 +178,7 @@ public class SqlColumn extends SqlSegment{
 		return addCondition(column, ">=");
 	}
 	
-	/** <= less than or equals
+	/** <= less than or equals to other column
 	 * @param column
 	 * @return
 	 */
@@ -178,17 +186,25 @@ public class SqlColumn extends SqlSegment{
 		return addCondition(column, "<=");
 	}
 	
+	/** like other column
+	 * @param column
+	 * @return
+	 */
 	public WhereSegment like(SqlColumn column){
 		return addCondition(column, "LIKE");
 	}
 	
+	/** not like other column
+	 * @param column
+	 * @return
+	 */
 	public WhereSegment notLike(SqlColumn column){
 		return addCondition(column, "NOT LIKE");
 	}
 	
 	
 	
-	/**  > greater than
+	/**  > greater than param value
 	 * @param param
 	 * @return
 	 */
@@ -196,7 +212,7 @@ public class SqlColumn extends SqlSegment{
 		return addCondition(param, ">");
 	}
 	
-	/** < less than
+	/** < less than param value
 	 * @param param
 	 * @return
 	 */
@@ -204,14 +220,34 @@ public class SqlColumn extends SqlSegment{
 		return addCondition(param, "<");
 	}
 	
+	/** = equals to value
+	 * @param param
+	 * @return
+	 */
 	public WhereSegment eq(Object param){
 		return addCondition(param, "=");
 	}
 	
+	/** <> not equals to value
+	 * @param param
+	 * @return
+	 */
+	public WhereSegment not_eq(Object param){
+		return addCondition(param, "<>");
+	}
+	
+	/** >= greater than or equals to value
+	 * @param param
+	 * @return
+	 */
 	public WhereSegment gt_eq(Object param){
 		return addCondition(param, ">=");
 	}
 	
+	/** <= less than or equals to value
+	 * @param param
+	 * @return
+	 */
 	public WhereSegment lt_eq(Object param){
 		return addCondition(param, "<=");
 	}
