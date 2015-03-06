@@ -19,19 +19,29 @@ public class SQLTest {
 	
 	@Test
 	public void testCondition(){
+		/*
 		QuerySql sql = SqlBuilder
 			    .select(
-			        Order.ID,
-			        Order.NAME,
-			        Order.CREATE_TIME,
-			        Member.NAME.as("member_name")
+			        _Order.id
 			    )
-			    .from(Member._TABLE)
+			    .from(Member.)
 			    .leftJoin(Order._TABLE, Order.MEMBER_ID, Member.ID)
 			    .where(
 			        Order.ID.mul(2).lt_eq(Member.ID)
 			    )
 			    .orderBy(Order.CREATE_TIME.desc());
+		
+		System.out.println(sql);
+		*/
+	}
+	
+	@Test
+	public void testD(){
+		QuerySql sql = SqlBuilder
+				.select(_Order.id)
+				.from(_Order.TABLE)
+				.where(_Order.name.notLike("%r"))
+				.orderBy(_Order.name.desc());
 		
 		System.out.println(sql);
 	}
@@ -53,5 +63,10 @@ public class SQLTest {
 		for (Object o : sql.getParams()){
 			System.out.println(o);
 		}
+	}
+	
+	@Test
+	public void testt(){
+		System.out.println("\u001b[0;38;2;233;235;235m....your text....\u001b[m");
 	}
 }

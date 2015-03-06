@@ -18,8 +18,8 @@ public class SqlColumn extends SqlSegment{
 		return con;
 	}
 	
-	public static SqlColumn of(SqlTable table, String column){
-		SqlColumn con = new SqlColumn(table.getName()+"."+column);
+	public static SqlColumn of(String tableName, String column){
+		SqlColumn con = new SqlColumn(tableName + "." + column);
 		return con;
 	}
 	
